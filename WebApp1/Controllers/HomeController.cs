@@ -35,6 +35,15 @@ namespace WebApp1.Controllers
             ViewBag.maloai = maloai;
             return View(lst);
         }
+
+        public IActionResult ChiTietSanPham(string masp)
+        {
+            var SanPham = db.TDanhMucSps.SingleOrDefault(x=>x.MaSp==masp);
+            var anhSanPham =db.TAnhSps.Where(x=>x.MaSp==masp).ToList();
+            ViewBag.anhSanPham = anhSanPham;    
+            return View(SanPham);
+        }
+
         public IActionResult Privacy()
         {
             return View();
