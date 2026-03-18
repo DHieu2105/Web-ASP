@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebApp1.Models;
+using WebApp1.ViewModels;
 using X.PagedList;
 
 namespace WebApp1.Controllers
@@ -42,6 +43,17 @@ namespace WebApp1.Controllers
             var anhSanPham =db.TAnhSps.Where(x=>x.MaSp==masp).ToList();
             ViewBag.anhSanPham = anhSanPham;    
             return View(SanPham);
+        }
+
+        public IActionResult ProductDetail(string maSp)
+        {
+            var sanPham = db.TDanhMucSps.SingleOrDefault(x => x.MaSp == maSp);
+            var anhSanPham = db.TAnhSps.Where(x => x.MaSp == maSp).ToList();
+            var homeProductDetailViewModel = new HomeProductDetailViewModel { 
+                danhMucSp = sanPham,
+                anhSps = anhSanPham
+            };
+            return View(homeProductDetailViewModel);
         }
 
         public IActionResult Privacy()
