@@ -9,7 +9,7 @@
         <ul>
             @foreach(var item in Model)
             {
-                var getUrl = "https://localhost:1036/api/productapi/" + item.MaLoai;
+                var getUrl = "https://localhost:7036/api/productapi/" + item.MaLoai;
                 <li><a style="cursor:pointer" onclick="showProductByCategort('@getUrl')" >@item.Loai</a></li>
                 @*@<li><a asp-controller="Home" asp-action="SanPhamTheoLoai" asp-route-maloai="@item.MaLoai">@item.Loai</a></li>*@
             }
@@ -19,20 +19,20 @@
 
 <script>
     function showProductByCategort(getUrl){
-    var str=' '
+    var str='';
     $.ajax({
         url: getUrl,
         type: 'GET',
-        dataTypr:'json',
+        dataType:'json',
         success:function(data){
             $.each(data,function(key,val){
-                str += '<p>' +val.TenSp+'</p>';
-            })
-            $('#displayProducts').html(str);
+                 str += '<p>' + val.tenSp + '</p>'
+            });
+                $('#displayProduct').html(str);
         },
-        Error:function(xhr){
-            alert(xhr.reponseText);
-            },
-        })
+        error:function(xhr){
+            alert(xhr.responseText)
+            }
+        });
     }
 </script>

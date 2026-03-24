@@ -14,13 +14,13 @@ namespace WebApp1.Controllers
         public IEnumerable<Product> GetAllProducts()
         {
             var sanPham = (from p in db.TDanhMucSps select new Product
-                           {
+            {
                                MaSp = p.MaSp,
                                TenSp = p.TenSp,
                                MaLoai = p.MaLoai,
                                AnhDaiDien = p.AnhDaiDien,
                                GiaNhoNhat = p.GiaNhoNhat
-                           }).ToList();
+            }).ToList();
             return sanPham;
         }
 

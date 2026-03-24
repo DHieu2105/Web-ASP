@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebApp1.Models;
+using WebApp1.Models.Authentication;
 using WebApp1.ViewModels;
 using X.PagedList;
 
@@ -16,7 +17,7 @@ namespace WebApp1.Controllers
         {
             _logger = logger;
         }
-
+        [Authentication]
         public IActionResult Index(int? page)
         {
             int pageSize = 8;
@@ -26,7 +27,7 @@ namespace WebApp1.Controllers
 
             return View(lst);
         }
-
+        [Authentication]
         public IActionResult SanPhamTheoLoai( string maloai, int ? page)
         {
             int pageSize = 8;

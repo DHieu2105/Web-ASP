@@ -11,6 +11,7 @@ var connectionString = builder.Configuration.GetConnectionString("QlbanVaLiconte
 builder.Services.AddDbContext<QlbanVaLiContext>(x => x.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<ILoaiSpRepository, LoaiSpRepository>();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -23,16 +24,15 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseAuthorization();
-
-app.MapStaticAssets();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
-
+    pattern: "{controller=Access}/{action=Login}/{id?}");
 
 app.Run();
